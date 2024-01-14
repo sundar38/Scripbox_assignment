@@ -46,10 +46,10 @@ function Dashboard() {
                 <table>
                     <thead>
                     <tr>                                       
-                        <th onClick={()=> sorting("title")} style={{cursor: "pointer"}}>Title</th>
-                        <th onClick={()=> sorting("author")}>Description</th>
-                        <th onClick={()=> sorting("publication_year")}>Votes Count</th>
-                        <th onClick={()=> sorting("genre")}>Creation date</th>
+                        <th  style={{cursor: "pointer"}}>Title</th>
+                        <th >Description</th>
+                        <th >Votes Count</th>
+                        <th >Creation date</th>
                     </tr>
                     </thead>
                     <tbody>
