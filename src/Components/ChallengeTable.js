@@ -28,8 +28,9 @@ const ChallengeTable = ({ challenges, onUpvote, setChallenges }) => {
     }
   }
     return (
-   
-        <table>
+    
+        // <h3>Challenge</h3>
+        <table className='challengetable'>
           <thead>
           <tr>                                                  
               <th >Title</th>
@@ -40,13 +41,13 @@ const ChallengeTable = ({ challenges, onUpvote, setChallenges }) => {
           </tr>
           </thead>
           <tbody>
-        {challenges.map((challenge) => (         
-              
+        {challenges.map((challenge) => (       
               <tr key={challenge.id}>                 
                   <td>{challenge.title}</td>                                 
                   <td>{challenge.description}</td>
                   <td>{challenge.tags.join(', ')}</td>              
-                  <td>{challenge.date}</td>
+                  {/* <td>{challenge.date}</td> */}
+                   <td>{new Date(challenge.createdDate).toLocaleString()}</td>
                    <td>{challenge.upvotes}</td>
                    <button onClick={() => onUpvote(challenge.id)}>Upvote</button>
                   {/* <ThumbUpIcon onClick={()=>handleupvote(index)}/> */}

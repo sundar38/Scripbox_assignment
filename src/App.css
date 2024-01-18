@@ -2,6 +2,12 @@ table, tr,th, td{
   border: 1px solid black;
   border-collapse: collapse;
   padding: 5px;
+  margin: 5px;
+}
+.heading{
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .container{
   display: flex;
@@ -14,4 +20,24 @@ table, tr,th, td{
 }
 table{
   width: 70%;
+  
+}
+.challengetable{
+  border-radius: 5px;
+}
+button{
+  margin: 5px;
+}
+.enteremployeeid{
+ position: absolute;
+ left: 40%;
+ top: 40%
+}
+.error{
+  color: red;
+}
+.fields{
+  margin: 5px;
+  width: 300px;
+  padding: 5px;
 }

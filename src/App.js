@@ -1,19 +1,50 @@
-import logo from './logo.svg';
 import './App.css';
+import Login from './Components/Login';
+import { useState, useEffect } from 'react';
+import ChallengeForm from './Components/ChallengeForm';
+import ChallengeTable from './Components/ChallengeTable';
+function App() {  
+  const [loggedinuser, setLoggedinuser]= useState(false)
+  const [challenges, setChallenges] = useState([]);
+  const [employeeid, setEmployeeid]= useState()
+  useEffect(() => {
+    const storedChallenges = JSON.parse(localStorage.getItem('challenges')) || [];
+    setChallenges(storedChallenges);
+    // localStorage.removeItem("challenges")
+  }, []);
 
-import { Routes, Route } from 'react-router';
-import Login from './Login';
-import Dashboard from './Dashboard';
+  const addtheChallenge = (newChallenge) => {
+    const updatedChallenges = [...challenges, { ...newChallenge, id: Date.now(), createdDate: new Date().toISOString, upvotes: 0 }];
+    console.log(updatedChallenges);
+    setChallenges(updatedChallenges);
+    localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
+  };
 
-import Dashboard2 from './Dashboard2';
-
-function App() {
+  const handleUpvote = (challengeId) => {
+    const updatedChallenges = challenges.map((challenge) =>
+      challenge.id === challengeId ? { ...challenge, upvotes: challenge.upvotes + 1 } : challenge
+    );
+    setChallenges(updatedChallenges);
+    localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
+  };
+  function receivemployeeid(empid){
+    setEmployeeid(empid)
+    setLoggedinuser(true)
+  }
   return (
     <div className="App">     
-        <Routes>
-          <Route path="/" element={<Login />}/>
-          <Route path='/dashboard' element={<Dashboard2/>}/>
-        </Routes>
+        
+        {!loggedinuser?
+              <Login receivemployeeid={receivemployeeid}/>:
+              <div className='container'>
+                <h2 className='heading'>Hello {employeeid}!!!</h2>
+                <h2>Hack Ideas</h2>
+                <ChallengeForm addtheChallenge={addtheChallenge} />
+                <ChallengeTable challenges={challenges} onUpvote={handleUpvote} setChallenges={setChallenges} />
+              </div>
+}
+         
+
     </div>
   );
 }
