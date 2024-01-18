@@ -37,6 +37,4 @@ test('allows user to add a challenge', () => {
     const addChallengeButton = getByText('Add Challenge');
     fireEvent.click(addChallengeButton);
   
-    // const challengeTitle = getByText('New Challenge');
-    // expect(challengeTitle).toBeInTheDocument();
   });

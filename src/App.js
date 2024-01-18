@@ -10,11 +10,11 @@ function App() {
   useEffect(() => {
     const storedChallenges = JSON.parse(localStorage.getItem('challenges')) || [];
     setChallenges(storedChallenges);
-    // localStorage.removeItem("challenges")
+    //  localStorage.removeItem("challenges")
   }, []);
 
   const addtheChallenge = (newChallenge) => {
-    const updatedChallenges = [...challenges, { ...newChallenge, id: Date.now(), createdDate: new Date().toISOString, upvotes: 0 }];
+    const updatedChallenges = [...challenges, { ...newChallenge, id: Date.now(), createdDate: new Date().toDateString(), upvotes: 0 }];
     console.log(updatedChallenges);
     setChallenges(updatedChallenges);
     localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
