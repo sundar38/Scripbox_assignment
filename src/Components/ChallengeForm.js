@@ -7,10 +7,10 @@ const ChallengeForm = ({ addtheChallenge }) => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      addtheChallenge({ title, description, tags: tags.split(',') });
+      addtheChallenge({ title, description, tags: tags.split(',') });//assigning all the values to challenge
       setTitle("");
       setDescription("");
-      setTags("");
+      setTags(""); //making all these values to "" after pushing
     };
   
     return (
@@ -30,8 +30,7 @@ const ChallengeForm = ({ addtheChallenge }) => {
           <input type="text" value={tags} className='fields' onChange={(e) => setTags(e.target.value)} placeholder='Enter the tags' required />
         </label>
         <br></br>
-        <button type="submit">Add Challenge</button>
-        
+        <button type="submit">Add Challenge</button>        
       </form>
     );
   };

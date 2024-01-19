@@ -2,67 +2,51 @@ import {React, useState} from 'react'
 
 const ChallengeTable = ({ challenges, onUpvote, setChallenges }) => { 
   const [order, setOrder]= useState("ASC")
-  const [sortBy, setSortBy] = useState('');
 
- 
   function sorting(text){
-    if(text== "sortvote"){  
-      if(order== "ASC"){    
+    if(text== "sortvote"){  //sorting based on number of votes
+      if(order== "ASC"){    //in ascending order
         var sortedChallenges=[...challenges].sort((challenge1, challenge2)=> challenge1.upvotes- challenge2.upvotes)
         setOrder("DSC")
       }
-      else{
+      else{                 //in descending order
         var sortedChallenges=[...challenges].sort((challenge1, challenge2)=> challenge2.upvotes- challenge1.upvotes)
         setOrder("ASC")
       }
       setChallenges(sortedChallenges)    
     }
-    // else{
-    //   if(order== "ASC"){    
-    //     var sortedChallenges=[...challenges].sort((challenge1, challenge2)=> challenge1.date.getDate()- challenge2.date.getDate())
-    //     setOrder("DSC")
-    //   }
-    //   else{
-    //     var sortedChallenges=[...challenges].sort((challenge1, challenge2)=> challenge2.date.getDate()- challenge1.date.getDate())
-    //     setOrder("ASC")
-    //   }
-    //   setChallenges(sortedChallenges) 
+   else{
 
-    // }
+   }
   }
-    return (
-      
-
-
+    return (      
 
         <table className='challengetable'>
           <thead>
-          <tr>                                                  
+            <tr>                                                  
               <th >Title</th>
               <th>Description</th>
               <th >Tags</th>
-              <th onClick={()=> sorting("sortdate")} style={{cursor: "pointer"}}>Date</th>
-              <th onClick={()=> sorting("sortvote")} style={{cursor: "pointer"}}>Upvote</th>              
-          </tr>
+              <th>Date</th>
+              <th onClick={()=> sorting("sortvote")} style={{cursor: "pointer"}}>Upvote</th>                           
+            </tr>
           </thead>
           <tbody>
-        {challenges.map((challenge) => (       
-              <tr key={challenge.id}>                 
-                  <td>{challenge.title}</td>                                 
-                  <td>{challenge.description}</td>
-                  <td>{challenge.tags.join(', ')}</td>              
-                  {/* <td>{challenge.date}</td> */}
-                   <td>{challenge.createdDate}</td>
-                   <td>{challenge.upvotes}</td>
-                   <button onClick={() => onUpvote(challenge.id)}>Upvote</button>
+            {challenges.map((eachchallenge) => (        //rendering each challenge in table
+              <tr key={eachchallenge.id}>                 
+                  <td>{eachchallenge.title}</td>                                 
+                  <td>{eachchallenge.description}</td>
+                  <td>{eachchallenge.tags.join(', ')}</td>             
+                  <td>{eachchallenge.createdDate}</td>
+                   <td>{eachchallenge.upvotes}</td>
+                   <button onClick={() => onUpvote(eachchallenge.id)}>Upvote</button>
                   {/* <ThumbUpIcon onClick={()=>handleupvote(index)}/> */}
-              </tr>
-              
+              </tr>              
               ))}
              
           </tbody>
       </table>
-     
+      
     );
   };
   
