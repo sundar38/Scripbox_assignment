@@ -3,15 +3,16 @@ import Login from './Components/Login';
 import { useState, useEffect } from 'react';
 import ChallengeForm from './Components/ChallengeForm';
 import ChallengeTable from './Components/ChallengeTable';
+
 function App() {  
   const [isuserloggedin, setIsuserLoggedin]= useState(false)
   const [challenges, setChallenges] = useState([]);
   const [employeeid, setEmployeeid]= useState()
   
   useEffect(() => {
-    const storedChallenges = JSON.parse(localStorage.getItem('challengeslist')) || [];
+    const storedChallenges = JSON.parse(localStorage.getItem('challenges')) || [];
     setChallenges(storedChallenges);
-      localStorage.removeItem("challengeslist")
+      // localStorage.removeItem("challengeslist")
   }, []);
 
   const addtheChallenge = (newChallenge) => {
@@ -23,7 +24,7 @@ function App() {
 
   const handleUpvote = (challengeId) => {
     const updatedChallenges = challenges.map((challenge) =>
-      challenge.id === challengeId ? { ...challenge, upvotes: challenge.upvotes + 1 } : challenge
+      (challenge.id === challengeId) && (employeeid!=challenge.employeeid) ? { ...challenge, upvotes: challenge.upvotes + 1 } : challenge
     );
     setChallenges(updatedChallenges);
     localStorage.setItem('challenges', JSON.stringify(updatedChallenges));
@@ -33,7 +34,7 @@ function App() {
     setIsuserLoggedin(true)
   }
   return ( //render login page only if user is loggedin or else then navigate him to challengeform page 
-    <div className="App">     
+    <div className="App">   
          
         
         {!isuserloggedin?
@@ -42,9 +43,10 @@ function App() {
                 <h2 className='heading'>Hello {employeeid}!!!</h2>
                 <h2>Hack Ideas</h2>
 
-                <ChallengeForm addtheChallenge={addtheChallenge} /> 
+                <ChallengeForm addtheChallenge={addtheChallenge} employeeid={employeeid}/> 
 
-                <ChallengeTable challenges={challenges} onUpvote={handleUpvote} setChallenges={setChallenges} />
+                <ChallengeTable challenges={challenges} onUpvote={handleUpvote} setChallenges={setChallenges} employeeid={employeeid} />
+               
                 
               </div>
         }        

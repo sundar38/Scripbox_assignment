@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 
-const ChallengeTable = ({ challenges, onUpvote, setChallenges }) => { 
+const ChallengeTable = ({ challenges, onUpvote, setChallenges, employeeid }) => { 
   const [order, setOrder]= useState("ASC")
 
   function sorting(text){
@@ -23,17 +23,19 @@ const ChallengeTable = ({ challenges, onUpvote, setChallenges }) => {
 
         <table className='challengetable'>
           <thead>
-            <tr>                                                  
+            <tr> 
+              <th>ID</th>                                                 
               <th >Title</th>
               <th>Description</th>
               <th >Tags</th>
-              <th>Date</th>
+              <th >Date</th>
               <th onClick={()=> sorting("sortvote")} style={{cursor: "pointer"}}>Upvote</th>                           
             </tr>
           </thead>
           <tbody>
             {challenges.map((eachchallenge) => (        //rendering each challenge in table
-              <tr key={eachchallenge.id}>                 
+              <tr key={eachchallenge.id}>  
+                  <td>{employeeid}</td>               
                   <td>{eachchallenge.title}</td>                                 
                   <td>{eachchallenge.description}</td>
                   <td>{eachchallenge.tags.join(', ')}</td>             

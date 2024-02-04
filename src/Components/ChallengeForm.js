@@ -1,13 +1,24 @@
 import {React, useState} from 'react'
 
-const ChallengeForm = ({ addtheChallenge }) => {
+const ChallengeForm = ({ addtheChallenge, employeeid }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [tags, setTags] = useState('');
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      addtheChallenge({ title, description, tags: tags.split(',') });//assigning all the values to challenge
+      console.log("hi");
+
+      // const namecheck=/^[0-9a-zA-Z ]$/
+      // console.log(namecheck.exec(title));
+      // if(title==" "){
+      //   alert("not working")
+      // }
+
+
+
+
+      title==" "? alert("not working") :addtheChallenge({ employeeid, title, description, tags: tags.split(',') });//assigning all the values to challenge
       setTitle("");
       setDescription("");
       setTags(""); //making all these values to "" after pushing
